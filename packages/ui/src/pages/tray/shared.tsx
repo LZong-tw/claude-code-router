@@ -606,10 +606,11 @@ export function formatUsdCost(value: number | undefined): string {
   if (normalized < 0.01) {
     return `$${normalized.toFixed(6)}`;
   }
+  const fractionDigits = normalized >= 100 ? 0 : 2;
   return new Intl.NumberFormat(undefined, {
     currency: "USD",
-    maximumFractionDigits: normalized >= 100 ? 0 : 2,
-    minimumFractionDigits: 2,
+    maximumFractionDigits: fractionDigits,
+    minimumFractionDigits: fractionDigits,
     style: "currency"
   }).format(normalized);
 }
